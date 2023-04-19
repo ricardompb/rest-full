@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-full
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: rest-full
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-full
+  labels:
+    app: rest-full
+spec:
+  selector:
+    matchLabels:
+      app: rest-full
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rest-full
+    spec:
+      containers:
+        - name: node
+          image: krtec/rest-full
+          command: [ "/bin/sh" ]
+          args: [ "-c", "cd /usr/src/app/krapp; npm run start" ]
+          ports:
+            - containerPort: 3000
