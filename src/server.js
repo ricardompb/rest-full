@@ -3,11 +3,23 @@ const app = express()
 const PORT = 8080
 const HOST = '0.0.0.0'
 
+const morgan = require('morgan')
+
 const cors = require('cors')
 app.use(cors())
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+
+app.use(morgan(function (tokens, req, res) {
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.status(req, res),
+    tokens.res(req, res, 'content-length'), '-',
+    tokens['response-time'](req, res), 'ms'
+  ].join(' ')
+}))
 
 const router = express.Router()
 const produtoController = require('./controller/produto.controller')
