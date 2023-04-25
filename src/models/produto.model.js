@@ -1,4 +1,4 @@
-const lista_produtos = {
+module.exports = {
   produtos: [
     { id: 1, descricao: "Arroz parboilizado 5Kg", valor: 25.00, marca: "Tio João"  },
     { id: 2, descricao: "Maionese 250gr", valor: 7.20, marca: "Helmans"  },
@@ -7,5 +7,3 @@ const lista_produtos = {
     { id: 5, descricao: "Nescau 400gr", valor: 8.00, marca: "Nestlé"  },
   ]
 }
-
-module.exports = lista_produtos
